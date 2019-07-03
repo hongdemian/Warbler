@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
+const messageRoutes = require("./routes/messages");
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +15,7 @@ morgan("combined");
 app.use(bodyParser.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users/:id/messages", messageRoutes);
 
 app.use(function(req, res, next) {
   let err = new Error("Not Found!");
